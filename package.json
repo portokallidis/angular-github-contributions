@@ -17,7 +17,8 @@
     "github"
   ],
   "author": {
-    "name": "Nick Portokallidis"
+    "name": "Nick Portokallidis",
+    "url":"www.nporto.com"
   },
   "license": "MIT",
   "devDependencies": {

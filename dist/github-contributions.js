@@ -1,7 +1,8 @@
 /*!
  * angular-github-contributions
  * https://github.com/portokallidis/angular-github-contributions
- * Version: 0.0.8 - 2016-07-09T20:03:47.812Z
+ * Version: 0.0.8 - 2016-07-09T20:18:17.085Z
+ * Author: Nick Portokallidis (www.nporto.com)
  * License: MIT
  */
 

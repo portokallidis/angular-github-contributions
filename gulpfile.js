@@ -26,13 +26,14 @@ var config = {
       ' * <%= pkg.name %>\n' +
       ' * <%= pkg.homepage %>\n' +
       ' * Version: <%= pkg.version %> - <%= timestamp %>\n' +
+      ' * Author: <%= pkg.author.name %> (<%= pkg.author.url %>)\n' +
       ' * License: <%= pkg.license %>\n' +
       ' */\n\n\n'
 };
 
 gulp.task('connect', function() {
   connect.server({
-    root: '.',
+    root: './',
     livereload: true
   });
 });
@@ -87,7 +88,7 @@ gulp.task('scripts', function() {
       timestamp: (new Date()).toISOString(), pkg: config.pkg
     }))
     .pipe(gulp.dest('dist'))
-    .pipe(rename({suffix: '.min.js'}))
+    .pipe(rename({suffix: '.min',extname: ".js"}))
     .pipe(uglify({preserveComments: 'some'}))
     .pipe(gulp.dest('./dist'))
     .pipe(connect.reload());
