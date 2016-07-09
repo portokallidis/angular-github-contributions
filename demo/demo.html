@@ -1,0 +1,21 @@
+<!doctype html>
+<html ng-app="demo">
+
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS github-contributions directive demo</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  </head>
+  
+  <body>
+    <div class="container">
+      <github-graph username="portokallidis"></github-graph>
+    </div>
+  
+    <script src="../dist/github-contributions.js"></script>
+    <script type="text/javascript">
+      var app = angular.module('demo', ['np.github-contributions']);
+    </script>
+  </body>
+
+</html>
