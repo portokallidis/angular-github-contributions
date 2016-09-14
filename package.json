@@ -1,6 +1,6 @@
 {
   "name": "angular-github-contributions",
-  "version": "0.0.9",
+  "version": "0.0.8",
   "description": "Angular Directive for displaying github contributions without any dependency",
   "repository": {
     "type": "git",

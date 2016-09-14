@@ -1,7 +1,7 @@
 /*!
  * angular-github-contributions
  * https://github.com/portokallidis/angular-github-contributions
- * Version: 0.0.9 - 2016-09-14T21:41:31.650Z
+ * Version: 0.0.8 - 2016-07-09T20:18:17.085Z
  * Author: Nick Portokallidis (www.nporto.com)
  * License: MIT
  */
@@ -16,6 +16,7 @@ angular.module('np.github-contributions', []).directive('githubContributions', f
 
       var options = attr.options || {};
       var username = attr.username;
+      var titleCssClass = "github-contributions-title";
       var graphCssClass = "github-contributions-graph";
       if (!username) {
         console.error("No username supplied");
@@ -27,30 +28,36 @@ angular.module('np.github-contributions', []).directive('githubContributions', f
       $http.get(proxy("https://github.com/" + username), {
         cache: true
       }).then(function(res) {
-        // remove text svg tags
-        var removeText=new RegExp(/<text[\s\S]*(.*?)<\/text>/,"g");
-        
-        // match graph
-        var matchGraph=new RegExp(/<div class=\"js-calendar-graph[\s\S]*(.*?)<\/div>/,"g");
-        
-        var graphtext = res.data.match(matchGraph);
-        
+
+        var graphtext = res.data.match(/<div class=\"boxed-group flush\">[\s\S]*(.*?)<\/div>/);
         if (!graphtext) {
           console.debug("No graph found, check github");
           return;
         }
+
         var elem = document.createElement('div');
-        elem.innerHTML = graphtext[0].toString().replace(removeText,"");
-        
-        // contributions graph - scalable!  
-        var graph = elem.querySelector('svg');
-        var gW = graph.getAttribute("width");
-        var gH = graph.getAttribute("height");
-        graph.setAttribute("width", "100%");
-        graph.setAttribute("height", "100%");
-        graph.setAttribute("viewBox", "14 8 " + gW + " " + gH);
-        graph.setAttribute("class", graphCssClass);
-        ielem.append(graph);
+        elem.innerHTML = graphtext;
+
+        if (!options.notitle) {
+          // contributions title sum number   
+          var title = elem.querySelector('h3');
+          title.className = titleCssClass;
+          title.innerHTML = title.textContent.trim();
+          ielem.append(title);
+        }
+
+        if (!options.nograph) {
+          // contributions graph - scalable!  
+          var graph = elem.querySelector('svg');
+          var gW = graph.getAttribute("width");
+          var gH = graph.getAttribute("height");
+          graph.setAttribute("height", "100%");
+          graph.setAttribute("width", "100%");
+          graph.setAttribute("height", "100%");
+          graph.setAttribute("viewBox", "0 0 " + gW + " " + gH);
+          graph.setAttribute("class", graphCssClass);
+          ielem.append(graph);
+        }
 
       });
 
